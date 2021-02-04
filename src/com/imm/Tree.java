@@ -55,6 +55,19 @@ public class Tree {
             }
         }
     }
+    public boolean find(int value){
+        var current = root;
 
+        while(current != null){ // travels end of to the tree
+            if(value < current.value)
+                current = current.leftChild; // go to  left side tree
+            else if(value > current.value)  // go to  right side tree
+                current = current.rightChild;
+            else
+                //System.out.println("current: "+current.value);
+                return true; // value = current.value
+        }
+        return false; //some wehere at current=null
+    }
 
 }

@@ -10,5 +10,7 @@ public class Main {
         tree.insert(3);
         tree.insert(1);
         System.out.println("stop");
+
+        System.out.println(tree.find(4));
     }
 }
