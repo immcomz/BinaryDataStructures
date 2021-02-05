@@ -139,5 +139,34 @@ public class Tree {
         return  (root.leftChild == null && root.rightChild==null) ;
     }
 
+    public int minInBinarySearchTree(){
+        var current = root;
+        var last = current;
+
+        while(current != null){
+            last = current;
+            // trverse to left subtree leaf cause binary search tree
+            current = current.leftChild;
+        }
+        return last.value; // last leaf of left binary Tree which has the lowest number
+    }
+    public int min(){
+        return min(root);
+    }
+    //O(n) cause traver all over the tree
+    private int min(Node root){
+        //      root
+        //      /  \
+        //   left  right
+        // min= Math.min(Math.min(left,right),root)
+
+        //Base Condition
+        if(isLeaf(root)) return root.value;
+
+        var left = min(root.leftChild);
+        var right = min(root.rightChild);
+
+        return Math.min(Math.min(left,right),root.value);
+    }
 
 }
