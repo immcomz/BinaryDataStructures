@@ -127,6 +127,8 @@ public class Tree {
         return height(root);
     }
     private int height(Node root){
+        //use PostOrder approach cause go to leaves first/ Base Condition
+        //1+max(height(L),height(R))
         //when tree is empty
         if(root==null) return -1;
         //Base Condition
@@ -138,7 +140,7 @@ public class Tree {
     private boolean isLeaf(Node root){
         return  (root.leftChild == null && root.rightChild==null) ;
     }
-
+    //Olog(n) cause Travers Half of the Tree of Binary Search Tree(LeftSide)
     public int minInBinarySearchTree(){
         var current = root;
         var last = current;
@@ -153,8 +155,9 @@ public class Tree {
     public int min(){
         return min(root);
     }
-    //O(n) cause traver all over the tree
+    //O(n) cause traverse all over the tree
     private int min(Node root){
+        //use PostOrder traversal approach cause go to leaves first
         //      root
         //      /  \
         //   left  right
@@ -167,6 +170,25 @@ public class Tree {
         var right = min(root.rightChild);
 
         return Math.min(Math.min(left,right),root.value);
+    }
+
+    public boolean equals(Tree other){
+        if(other == null) return false;//other tree is null
+        return equals(root, other.root);
+
+    }
+    private boolean equals(Node first, Node second){
+        //Use Pre Order Traversal Approach/ Base Condition/ visit root first
+        //both trees are null
+        if(first == null && second == null) return true;
+        //when nodes has value
+        if(first != null && second != null){
+            return first.value == second.value
+                    //at the same time check the left and right subtrees(root.left , root.right)
+                    && equals(first.leftChild, second.leftChild)
+                    && equals(first.rightChild, second.rightChild);
+        }
+        return false;// first.value != second.value
     }
 
 }
