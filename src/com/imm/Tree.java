@@ -55,6 +55,7 @@ public class Tree {
             }
         }
     }
+
     public boolean find(int value){
         var current = root;
 
@@ -69,5 +70,59 @@ public class Tree {
         }
         return false; //some wehere at current=null
     }
+
+    public void traversePreOrder(){
+        //System.out.println("root "+root);
+        traversePreOrder(root);
+    }
+    public void traverseInOrder(){
+        traverseInOrder(root);
+    }
+    public void traversePostOrder(){
+        traversePostOrder(root);
+    }
+    private void traversePreOrder(Node root){
+        //first traverse the root and then leaves of it
+
+        //1.root (print)
+        //2.visit left recursively call itself
+        //3.visit right recursively call itself
+
+        //Base Condition
+        if(root == null) return;
+        System.out.println(root.value); //1
+        traversePreOrder(root.leftChild); //2
+        traversePreOrder(root.rightChild); //3
+
+    }
+    private void traverseInOrder(Node root){
+        //1.visit left recursively call itself
+        //2.root print recursively call itself
+        //3.visit right
+
+        //Base Condition
+        if(root == null) return;
+
+        traversePreOrder(root.leftChild); //1
+        System.out.println(root.value); //2
+        traversePreOrder(root.rightChild); //3
+    }
+    private void traversePostOrder(Node root){
+        //first traverse the leaves and then root of them
+
+        //1.visit left recursively call itself
+        //2.visit right recursively call itself
+        //3.root print
+
+        //Base Condition
+        if(root == null) return;
+
+        traversePreOrder(root.leftChild); //1
+        traversePreOrder(root.rightChild); //2
+        System.out.println(root.value); //2
+
+    }
+
+
 
 }

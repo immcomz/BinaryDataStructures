@@ -18,6 +18,7 @@ public class Recursion {
     //in Recursion Calling the method itself. Java uses Stacks keep track of values
     public int factorialUsingRecursion(int n){
         //Base Condition / recursion termination condition otherwise this recursive forever
+        //Base Cindition avod cicle
         if(n == 0) return 1;
         //else loop the recursion
         return n * factorialUsingRecursion(n-1);
