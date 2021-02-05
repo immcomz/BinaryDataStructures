@@ -123,6 +123,21 @@ public class Tree {
 
     }
 
+    public int height(){
+        return height(root);
+    }
+    private int height(Node root){
+        //when tree is empty
+        if(root==null) return -1;
+        //Base Condition
+        //when reaches a leaf node return height of its root as 0
+        if(isLeaf(root)) return 0;
+        return 1+ Math.max(height(root.rightChild),height(root.rightChild));
+    }
+
+    private boolean isLeaf(Node root){
+        return  (root.leftChild == null && root.rightChild==null) ;
+    }
 
 
 }
