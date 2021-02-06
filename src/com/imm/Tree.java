@@ -244,4 +244,11 @@ public class Tree {
 
     }
 
+     public  void traverseLevelOrder(){
+        for(var i=0; i<=height(); i++){
+            System.out.println("i" +i);
+            for(var value : getNodesAtDistance(i))
+                System.out.println(value);
+        }
+     }
 }

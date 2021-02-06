@@ -31,11 +31,13 @@ public class Main {
         //System.out.println("min "+tree.min());
        // System.out.println("equals "+tree.equals(tree2));
         //System.out.println("is a binary search tree "+tree.isBinarySearchTree());
-        System.out.println("node at kth distance");
-        var list = tree.getNodesAtDistance(1);
-        for(var item: list){
-            System.out.println(item);
-        }
-        System.out.println("stop");
+//        System.out.println("node at kth distance");
+//        var list = tree.getNodesAtDistance(1);
+//        for(var item: list){
+//            System.out.println(item);
+//        }
+//        System.out.println("stop");
+
+        tree.traverseLevelOrder();
     }
 }
