@@ -184,11 +184,38 @@ public class Tree {
         //when nodes has value
         if(first != null && second != null){
             return first.value == second.value
-                    //at the same time check the left and right subtrees(root.left , root.right)
+                    //at the same time check the left and right
+                    // //subtrees(root.left , root.right) recursively
                     && equals(first.leftChild, second.leftChild)
                     && equals(first.rightChild, second.rightChild);
         }
         return false;// first.value != second.value
     }
+
+    public boolean isBinarySearchTree(){
+        //root can be any value so min and max can be any value of Integer
+        return isBinarySearchTree(root,Integer.MIN_VALUE,Integer.MAX_VALUE);
+    }
+    private boolean isBinarySearchTree(Node root,int min,int max){
+        //                 min   .    max
+        //           -infinity <root> +infinity
+        //                       20
+         //                    /   \
+         //   ( -infinity,root-1) (root+1, +infinity)
+         //                  /       \
+         //                10        40
+
+        //check the root. if null is a binary search tree
+         //pre order travels base condition
+         if(root == null) return true;
+            // validate the root in the correct range (min < root < max)
+         if(root.value < min  || root.value >max) return false;
+
+         return isBinarySearchTree(root.leftChild,min,root.value-1)
+                 && isBinarySearchTree(root.rightChild,root.value+1,max);
+
+     }
+
+
 
 }
