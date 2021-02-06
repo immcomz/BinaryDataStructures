@@ -1,6 +1,7 @@
 package com.imm;
 
 
+import java.util.ArrayList;
 
 public class Tree {
     private class Node {
@@ -216,26 +217,30 @@ public class Tree {
 
      }
 
-    public void printNodesAtKthDistance(int distance){
-        printNodesAtKthDistance(root,distance);
+    public ArrayList<Integer> getNodesAtDistance(int distance){
+        //get list of all nodes at distance
+        var list = new ArrayList<Integer>();
+        getNodesAtDistance(root,distance,list);
+        return list;
     }
-    private void printNodesAtKthDistance(Node root,int distance){
+    private void getNodesAtDistance(Node root,int distance,ArrayList<Integer> list){
         // ex print distance level at 2
-        //       20  distance from root= 0 = distance to target 2(2-0) where 2=distance example
+        //       20  distance from root= 0 = distance to target =2(2-0) where 2=distance example
         //      /   \
-        //    10    21 distance from root =1 distance to target 1(2-1)
+        //    10    21 distance from root =1 distance to target =1(2-1)
         //   /  \  /  \
-        //  18  9  9  10 distance from root = 2 distance to target 0(2-1-1)
+        //  18  9  9  10 distance from root = 2 distance to target =0(2-1-1)
         if(root == null) return;
 
         //base condition
         if(distance == 0){
-            System.out.println(root.value);
+            list.add(root.value);
+            //System.out.println(root.value);
             return;
         }
         //recursively go 1step(distance-1) down
-        printNodesAtKthDistance(root.leftChild,distance -1);
-        printNodesAtKthDistance(root.rightChild,distance -1);
+        getNodesAtDistance(root.leftChild,distance -1,list);
+        getNodesAtDistance(root.rightChild,distance -1,list);
 
     }
 

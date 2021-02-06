@@ -32,7 +32,10 @@ public class Main {
        // System.out.println("equals "+tree.equals(tree2));
         //System.out.println("is a binary search tree "+tree.isBinarySearchTree());
         System.out.println("node at kth distance");
-        tree.printNodesAtKthDistance(0);
+        var list = tree.getNodesAtDistance(1);
+        for(var item: list){
+            System.out.println(item);
+        }
         System.out.println("stop");
     }
 }
