@@ -2,6 +2,7 @@ package com.imm;
 
 public class AVLTree {
     private class AVLNode{
+        private int height;
         private int value;
         private AVLNode leftChild;
         private AVLNode rightChild;
@@ -12,7 +13,7 @@ public class AVLTree {
 
         @Override
         public String toString() {
-            return "Node"+value;
+            return "value"+this.value;
         }
     }
 
@@ -42,7 +43,18 @@ public class AVLTree {
             root.leftChild = insert(root.leftChild,value);
         else //go to right side recursively
             root.rightChild = insert(root.rightChild,value);
-        //System.out.println("inseerting root");
+
+        //cakculating each node's height
+        root.height = Math.max(
+                height(root.leftChild),
+                height(root.rightChild) +1);
+
+        //finaly return the root value/left or right child
         return root;
     }
+    private int height(AVLNode node){
+        //this metod make sure the value of node's height (wheater empty or nor)
+        return node == null ? -1 : node.height;
+    }
+
 }
