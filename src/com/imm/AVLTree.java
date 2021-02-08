@@ -38,16 +38,24 @@ public class AVLTree {
         //base condition
         if(root == null)
             return new AVLNode(value);
+        //if(root.value == value) return root;
 
         if(value < root.value) //go to left side recursively
             root.leftChild = insert(root.leftChild,value);
         else //go to right side recursively
             root.rightChild = insert(root.rightChild,value);
 
-        //cakculating each node's height
+        //calculating each node's height
         root.height = Math.max(
                 height(root.leftChild),
                 height(root.rightChild) +1);
+
+        //Calculating the Balance Factor
+        //BF >1 => Left Heavy
+        //BF <-1 => Right Heavy
+        int BalanceFactor = height(root.leftChild) - height(root.rightChild);
+        if(BalanceFactor > 1) System.out.println(root.value+" is Left heavy");
+            else if(BalanceFactor <-1) System.out.println(root.value+" is Right heavy");
 
         //finaly return the root value/left or right child
         return root;
