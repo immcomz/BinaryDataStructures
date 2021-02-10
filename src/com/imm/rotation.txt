@@ -23,3 +23,11 @@
    20
    Balancefactor(30)= 0-1 = -1
    BalanceFactor(root.leftChild) < 0 = leftRotate(root.leftChild)
+-------------------------------------------------------------------------------
+root                            newRoot = root.right
+10                                  20
+  newRoot            newRoot.left=root
+   20                            10     30
+15      30                           15 =newRoot.left = root.right
+
+Reset the height of root and newRoot

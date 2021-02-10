@@ -46,33 +46,88 @@ public class AVLTree {
             root.rightChild = insert(root.rightChild,value);
 
         //calculating each node's height
-        root.height = Math.max(
-                height(root.leftChild),
-                height(root.rightChild) +1);
+        setHeight(root);
 
-        //Calculating the Balance Factor
-        balance(root);
-
-        //finaly return the root value/left or right child
-        return root;
+        //Calculating the Balance Factor &-
+        //-finaly return the balance root /left or right child
+        return balance(root);
     }
 
-    private void balance(AVLNode root){
-        //BF >1 => Left Heavy
-        //BF <-1 => Right Heavy
+    private AVLNode balance(AVLNode root){
 
         if(isLeftHeave(root)){ //when Left Heavy
-            if(balanceFactor(root.leftChild)<0) // balanceFactor < 0
-                System.out.println("Left Rotation On "+root.leftChild.value); //Left Rotate
-            System.out.println("Right Rotate On "+root.value);
+
+            //Detect two Rotation 1st leftRotate when balanceFactor < 0
+            if(balanceFactor(root.leftChild)<0)
+                root.leftChild = rotateLeft(root.leftChild); //Left Rotate
+            //case of skew/ second rotation
+            return rotateRight(root);
         }
         else if(isRightHeavy(root)) { //when right Heavy
-            if(balanceFactor(root.rightChild)>0) //balanceFactor > 0
-                System.out.println("Right Rotate On "+root.rightChild.value);//Right Rotate
-            System.out.println("Left Rotation On "+root.value);
+            //           1st Rotation   2nd Rotation
+            //   10        10
+            //      30 =>    20            20
+            //   20            30       10    30
+
+            //Detect two Rotation 1st rightRotate when balanceFactor > 0
+            if(balanceFactor(root.rightChild)>0)
+                root.rightChild = rotateRight(root.rightChild);//Right Rotate 30->20
+            //case of skew/ second rotation
+            return rotateLeft(root);
         }
+        //if balanced
+        return root;
 
     }
+    private AVLNode rotateLeft(AVLNode root){
+      // root                          newRoot = root.right
+       // 10                                   20
+       //   newRoot             newRoot.left=root
+       //     20                            10     30
+       // 15      30                            15 =newRoot.left = root.right
+
+        //step 1
+        var newRoot = root.rightChild; //10->20
+
+        //step 2
+        //   10 -(root)
+        //  /  \
+        //null  15 - (newRoot.leftChild)
+        root.rightChild = newRoot.leftChild;
+
+        //step 3
+        //      20 = newRoot
+        //    /    \
+        //   10  }
+        //  /  \  } = root/newRoot.leftChild
+        //     15 }
+        newRoot.leftChild = root;
+
+        //step 4
+        setHeight(root);
+        setHeight(newRoot);
+        return newRoot;
+    }
+    private AVLNode rotateRight(AVLNode root){
+        var newRoot = root.leftChild;
+
+        root.leftChild = newRoot.rightChild;
+        newRoot.rightChild = root;
+
+        setHeight(root);
+        setHeight(newRoot);
+
+        return newRoot;
+    }
+    private void setHeight(AVLNode node){
+        node.height = Math.max(
+                height(node.leftChild),
+                height(node.rightChild) +1);
+
+    }
+
+    //BF >1 => Left Heavy
+    //BF <-1 => Right Heavy
     private boolean isLeftHeave(AVLNode node){
         return balanceFactor(node) >1;
     }
