@@ -1,0 +1,25 @@
+ Detect Rotation
+
+ Right Heavy(Right Skew)           Left Rotate(10)
+ 10
+    20                   =>          20
+        30                      10        30
+ Balancefactor(20)= 0-1 = -1
+ BalanceFactor(root.rightChild) < 0 = leftRotate(root.rightChild)
+ -------------------------------------------------------------------------------
+
+ ImBalanced Right Child(30)     rightRotate(20) Followed By  ->  leftRotate(10)
+ Left Sub Tree(20)                  10                                  20
+ 10                                     20                  =>      10      30
+    30                       =>             30
+ 20
+ Balancefactor(30)= 1-0 = 1
+ BalanceFactor(root.rightChild) > 0 = rightRotate(root.rightChild)
+ -------------------------------------------------------------------------------
+  ImBalanced Left Child(30)     leftRotate(20) Followed By  ->  rightRotate(10)
+  Right Sub Tree(20)                   30                           20
+   30                               20                  =>      10      30
+10                       =>      10
+   20
+   Balancefactor(30)= 0-1 = -1
+   BalanceFactor(root.leftChild) < 0 = leftRotate(root.leftChild)
