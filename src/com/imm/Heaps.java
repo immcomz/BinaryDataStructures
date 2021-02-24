@@ -18,15 +18,21 @@ public class Heaps {
         buubleUp();
 
     }
-    public void remove(){
+    public int remove(){
         //heap empty
         if(isEmpty()) throw new IllegalStateException();
 
         //remove root node(index 0) and move last node to root node/ index 0
+        var root = items[0];
         items[0] =items[size-1];
         size--;
         //or  items[0] =items[--size];  decrement 1st and --size = similar to size-1
 
+        bubbleDown();
+
+        return root;
+    }
+    private void bubbleDown(){
         // bubbleDown items[root] < children
         var index = 0;
         while(index < size && !(isValidParent(index))){ //items[root] < children
@@ -41,11 +47,32 @@ public class Heaps {
         return size == 0;
     }
     private int largerChildIndex(int index){
+        // if there is no left child that means there is no right child,
+        if(!hasLeftChild(index)) return index; // - only parent avaulable
+
+        //if there is no right child return left child index
+        if(!hasrightChild(index)) return leftChildIndex(index);
+
+        //otherwise compare left and right child finally return larger index
         return  (leftChild(index) > rightChild(index)) ?
                 leftChildIndex(index): rightChildIndex(index);
     }
+    private boolean hasLeftChild(int index){
+        //valid left child if index <= size of heap
+       return leftChildIndex(index) <= size;
+    }
+    private boolean hasrightChild(int index){
+        return rightChildIndex(index) <= size;
+    }
     private boolean isValidParent(int index){
-        return items[index] > leftChild(index) && items[index] > rightChild(index);
+        if(!hasLeftChild(index)) return true; //no childs
+
+        var isValid = items[index] >= leftChild(index); // hasleftchild
+        if(hasrightChild(index))
+            //isValid = isValid & items[index] >= rightChild(index); // both child
+            isValid &= items[index] >= rightChild(index);
+
+        return isValid;
     }
     private int rightChild(int index){
         return items[rightChildIndex(index)];

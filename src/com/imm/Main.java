@@ -49,11 +49,9 @@ public class Main {
         heap.insert(10);
         heap.insert(5);
         heap.insert(17);
-        heap.insert(5);
-        heap.insert(3);
-        heap.insert(10);
+        heap.insert(4);
        heap.insert(30);
-       // heap.insert(30);
+       heap.remove();
         System.out.println("break point");
     }
 }
