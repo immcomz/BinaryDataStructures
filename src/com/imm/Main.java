@@ -44,6 +44,16 @@ public class Main {
 //        System.out.println("stop");
 
         //tree.traverseLevelOrder();
-
+// heaps///////////////
+        var heap = new Heaps();
+        heap.insert(10);
+        heap.insert(5);
+        heap.insert(17);
+        heap.insert(5);
+        heap.insert(3);
+        heap.insert(10);
+       heap.insert(30);
+       // heap.insert(30);
+        System.out.println("break point");
     }
 }
