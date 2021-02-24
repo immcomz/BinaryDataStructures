@@ -1,5 +1,7 @@
 package com.imm;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -46,12 +48,26 @@ public class Main {
         //tree.traverseLevelOrder();
 // heaps///////////////
         var heap = new Heaps();
-        heap.insert(10);
-        heap.insert(5);
-        heap.insert(17);
-        heap.insert(4);
-       heap.insert(30);
-       heap.remove();
+//        heap.insert(10);
+//        heap.insert(5);
+//        heap.insert(17);
+//        heap.insert(4);
+//       heap.insert(30);
+//       heap.remove();
         System.out.println("break point");
+
+        int [] numbers = {5,3,10,1,4,2};
+        //var heap = new Heaps();
+        for (var number : numbers )
+            heap.insert(number);
+
+        for(var i =0 ; i<numbers.length; i++)
+            //Descending Order
+            numbers[i]= heap.remove(); //heap always remove max value
+//
+//        for(var i =numbers.length-1 ; i>=0; i--)
+//            //Ascending Order
+//            numbers[i]= heap.remove(); //heap always remove max value
+        System.out.println(Arrays.toString(numbers));
     }
 }

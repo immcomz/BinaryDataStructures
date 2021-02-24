@@ -11,6 +11,7 @@ public class Heaps {
     private int[] items = new int[10];
     private int size; //to keep track of number of items in an array/heap
 
+
     public void insert(int value) {
 
         if(isFull()) throw new IllegalStateException();
