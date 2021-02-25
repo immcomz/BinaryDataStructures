@@ -211,7 +211,7 @@ public class Tree {
          if(root == null) return true;
             // validate the root in the correct range (min < root < max)
          if(root.value < min  || root.value >max) return false;
-
+         //otherwise root.value > min  && root.value < max
          return isBinarySearchTree(root.leftChild,min,root.value-1)
                  && isBinarySearchTree(root.rightChild,root.value+1,max);
 

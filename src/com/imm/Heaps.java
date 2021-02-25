@@ -114,4 +114,41 @@ public class Heaps {
         items[first] = items[second];
         items[second] = temp;
     }
+
+    //Heapify////
+    public static void heapify(int[] array) {
+        //var lastParentIndex = array.length / 2 - 1;
+        for (var i = 0; i < array.length; i++)
+            heapify(array, i);
+    }
+    private static void heapify(int[] array, int index) {
+        var largerIndex = index; //Assumption
+
+        var leftIndex = index * 2 + 1;
+        if (leftIndex < array.length &&
+                array[leftIndex] > array[largerIndex])
+            largerIndex = leftIndex; //set larger Index to left if left > current index
+
+        var rightIndex = index * 2 + 2;
+        if (rightIndex < array.length &&
+                array[rightIndex] > array[largerIndex])
+            largerIndex = rightIndex;
+
+        //base Condition
+        // if it's a heap
+        if (index == largerIndex) // root > its both children or opposite to above conditions
+            return;
+
+        swap(array, index, largerIndex);// otherwise swap two inexes
+        heapify(array, largerIndex); //Recursively hepify other elements in
+        // Array an go down the sub tree (index = largerIndex | heapify(array, largerIndex))
+    }
+
+    private static void swap(int[] array, int first, int second) {
+        //swap to indexes in an array
+        var temp = array[first];
+        array[first] = array[second];
+        array[second] = temp;
+    }
+
 }
