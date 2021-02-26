@@ -84,7 +84,7 @@ public class Main {
 //        System.out.println(Heaps.getKthLatrgest(numbers,7));
 
         //////Tries//////////
-        var trie = new Trie();
+        var trie = new TriesWithHashMaps();
         trie.insert("cat");
         trie.insert("can");
         System.out.println("Debug");

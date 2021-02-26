@@ -2,7 +2,7 @@ package com.imm;
 
 
 import java.util.HashMap;
-//With HashMaps No wasting memories Like arrays (initialising )
+//With HashMaps No wasting memories Like arrays (initialising 26 size array )
 public class TriesWithHashMaps {
     private class Node{
 
