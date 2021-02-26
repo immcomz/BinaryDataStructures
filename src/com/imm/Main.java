@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-	    AVLTree tree = new AVLTree();
-	    tree.insert(10);
-        tree.insert(20);
-        tree.insert(39);
+//	    AVLTree tree = new AVLTree();
+//	    tree.insert(10);
+//        tree.insert(20);
+//        tree.insert(39);
 
 
 //        tree.insert(10);
@@ -47,7 +47,7 @@ public class Main {
 
         //tree.traverseLevelOrder();
 // heaps///////////////
-        var heap = new Heaps();
+       // var heap = new Heaps();
 //        heap.insert(10);
 //        heap.insert(5);
 //        heap.insert(17);
@@ -83,6 +83,10 @@ public class Main {
 //
 //        System.out.println(Heaps.getKthLatrgest(numbers,7));
 
-
+        //////Tries//////////
+        var trie = new Trie();
+        trie.insert("cat");
+        trie.insert("can");
+        System.out.println("Debug");
     }
 }
