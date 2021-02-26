@@ -18,6 +18,19 @@ public class TriesWithHashMaps {
         public String toString() {
             return "value=" + value;
         }
+        //Abstraction to access to children (hiding internal implementation of Node class to Trie class)
+        //Robust code
+        public boolean hasAChild(Character ch){
+            return children.containsKey(ch);
+        }
+
+        public void addChild(Character ch){
+            children.put(ch,new Node(ch));
+        }
+
+        public Node getChild(Character ch){
+            return children.get(ch);
+        }
     }
 
     //Every Trie has Empty Root/Empty Character
@@ -28,10 +41,10 @@ public class TriesWithHashMaps {
         var current = root;//make current as root which is empty character
         for(var ch : word.toCharArray()){
 
-            //if current children at index = null, create a new node with character
-            if(current.children.get(ch) == null)
-                current.children.put(ch,new Node(ch));
-            current = current.children.get(ch); // GO to the next children if its not null
+            //if current doesn't have a child with key of current ch(character)
+            if(!current.hasAChild(ch))
+                current.addChild(ch); //then add child
+            current = current.getChild(ch); // otherwise to the next children if current has value of ch
         }
         current.isEndOfWord = true;
     }
