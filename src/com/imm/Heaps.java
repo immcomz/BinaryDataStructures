@@ -117,8 +117,13 @@ public class Heaps {
 
     //Heapify////
     public static void heapify(int[] array) {
-        //var lastParentIndex = array.length / 2 - 1;
-        for (var i = 0; i < array.length; i++)
+        //index of last parent
+        //       0
+        //   1       2 -> last Parent
+        // 3   4   5   6
+        var lastParentIndex = array.length / 2 - 1;
+        //use last parent to optimise the loop instead of iterate entrie array
+        for (var i = lastParentIndex; i >= 0; i--)
             heapify(array, i);
     }
     private static void heapify(int[] array, int index) {
