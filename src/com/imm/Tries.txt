@@ -1,0 +1,10 @@
+Trie(Class)
+    Node(private class)
+        value :char
+        children :Node[26] // 26 Alphabets
+        isEndOfWord :Boolean
+    //functions
+    insert(word :String)
+    index = insser Ch - 'a' // integer value of a=100
+    ex: calculate the index of 'D' in children Node Array
+    100-97 =3 (d)
