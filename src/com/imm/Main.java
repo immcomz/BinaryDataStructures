@@ -72,13 +72,17 @@ public class Main {
 //        System.out.println(Arrays.toString(numbers));
 
         ////////Heapify/////////////////
-        int [] numbers = {5,3,8,4,1,2};
+        int [] numbers = {5,3,8,4,10,2};
         Heaps.heapify(numbers);
-        System.out.println(Arrays.toString(numbers));
+
         //NOW ALWAYS ROOT HAS THE MAX VALUE COMPARE TO ITS BOTH CHILDREN
         //             8
         //         4       5
         //       3   1    2
+        System.out.println(Arrays.toString(numbers));
+
+        System.out.println(Heaps.getKthLatrgest(numbers,7));
+
 
     }
 }

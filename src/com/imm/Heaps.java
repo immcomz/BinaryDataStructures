@@ -114,6 +114,10 @@ public class Heaps {
         items[first] = items[second];
         items[second] = temp;
     }
+    public int max(){
+        if(isEmpty()) throw new IllegalStateException();
+        return items[0];
+    }
 
     //Heapify////
     public static void heapify(int[] array) {
@@ -156,4 +160,19 @@ public class Heaps {
         array[second] = temp;
     }
 
+    ///get Kth Largerst Item
+    //           10         k=1->remove(10)      8   K=2 -> remove(8)    k=3 -> remove(5)
+    //       5        8                       5    2                     remove() k times
+    //      4  3     2                     4    3
+
+    public static int getKthLatrgest(int []array,int k){
+        if(k<=0 || k>array.length) throw new IllegalStateException();
+        var heap = new Heaps();
+        for(var number: array)
+            heap.insert(number);
+
+        for(var i=0 ; i<k-1 ;i++)
+            heap.remove();
+        return heap.max();
+    }
 }
