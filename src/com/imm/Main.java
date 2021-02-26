@@ -56,11 +56,11 @@ public class Main {
 //       heap.remove();
 //        System.out.println("break point");
 
-///////////////Implementation to Priority Queues Using Heaps/////////////////
-//        int [] numbers = {5,3,10,1,4,2};
-//        //var heap = new Heaps();
+///////////////Sorting Heaps/////////////////
+//        int [] numbers = {5,3,10,1,4,2,8};
 //        for (var number : numbers )
 //            heap.insert(number);
+//        System.out.println(Arrays.toString(numbers));
 //
 //        for(var i =0 ; i<numbers.length; i++)
 //            //Descending Order
@@ -72,16 +72,16 @@ public class Main {
 //        System.out.println(Arrays.toString(numbers));
 
         ////////Heapify/////////////////
-        int [] numbers = {5,3,8,4,10,2};
-        Heaps.heapify(numbers);
-
-        //NOW ALWAYS ROOT HAS THE MAX VALUE COMPARE TO ITS BOTH CHILDREN
-        //             8
-        //         4       5
-        //       3   1    2
-        System.out.println(Arrays.toString(numbers));
-
-        System.out.println(Heaps.getKthLatrgest(numbers,7));
+//        int [] numbers = {5,3,8,4,10,2};
+//        Heaps.heapify(numbers);
+//
+//        //NOW ALWAYS ROOT HAS THE MAX VALUE COMPARE TO ITS BOTH CHILDREN
+//        //             8
+//        //         4       5
+//        //       3   1    2
+//        System.out.println(Arrays.toString(numbers));
+//
+//        System.out.println(Heaps.getKthLatrgest(numbers,7));
 
 
     }
