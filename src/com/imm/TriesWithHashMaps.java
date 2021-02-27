@@ -24,12 +24,18 @@ public class TriesWithHashMaps {
             return children.containsKey(ch);
         }
 
+        //Add children to HashMap with given Character
         public void addChild(Character ch){
             children.put(ch,new Node(ch));
         }
 
+        //get children to given Character
         public Node getChild(Character ch){
             return children.get(ch);
+        }
+        public Node[] getChildren(){
+            //return values with Node Array
+            return children.values().toArray(new Node[0]);
         }
     }
 
@@ -61,6 +67,28 @@ public class TriesWithHashMaps {
         }
         //otherwise found the word / return true
         return current.isEndOfWord;
+    }
+    public void preOrdertraverse(){
+        preOrdertraverse(root);
+    }
+    private void preOrdertraverse(Node root){
+        //Pre-Order: Visit the root first then children
+        System.out.println(root.value);
+        for(var child : root.getChildren())
+            preOrdertraverse(child); //recursively travels other childrens in current child
+    }
+
+    public void postOrdertraverse(){
+        postOrdertraverse(root);
+    }
+    private void postOrdertraverse(Node root){
+        //Post-Order: Visit the children first then root
+        for(var child : root.getChildren())
+            postOrdertraverse(child); //recursively travels other childrens in current child
+
+        //finally visit root
+        System.out.println(root.value);
+
     }
 }
 
