@@ -1,7 +1,10 @@
 package com.imm;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 //With HashMaps No wasting memories Like arrays (initialising 26 size array )
 public class TriesWithHashMaps {
     private class Node{
@@ -144,6 +147,49 @@ public class TriesWithHashMaps {
         if(!child.hasChildren() && !child.isEndOfWord)
            root.removeChild(ch);
 
+    }
+
+   // Auto Completion
+
+   //                                       c
+  //                                        a
+   //                                       r - last node of prefix
+   //                              start recursion
+   //                                      / \
+  //  (prefix+node(d).value) isEndOfWord  d   e (prefix+node(e).value)
+  //                      f(prefix+node(e).value+node(f).value)
+  //                             u
+   //                             l - isEndOfWord
+
+    public List<String> findWords(String prefix){
+        List<String> words = new ArrayList<>();
+        var lastNode = findLastNodeOf(prefix);
+        //start recursion
+        findWords(lastNode,prefix,words);
+        return words;
+    }
+    private void findWords(Node root, String prefix,List<String> words ){
+        //recursion method //pre-order Traversals
+
+        //if this current node represent an endOfWord (or word)
+        if(root.isEndOfWord)
+            words.add(prefix); // ex 'car' as prefix
+
+        //visit the children of this current/root node
+        for(var child: root.getChildren())
+            findWords(child,prefix + child.value,words); // 'card' and 'careful'
+
+    }
+    private Node findLastNodeOf(String prefix){
+        var current = root;
+        // loop over all the ch in this preix String
+        for(var ch: prefix.toCharArray()){
+            //get the current node for this character
+            var child = current.getChild(ch);
+            if(child == null) return null; // no any prefix word i  Trie
+            current = child; // otherwise set current to this child
+        }
+        return current; // last node of prefix
     }
 }
 

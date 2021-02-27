@@ -84,22 +84,30 @@ public class Main {
 //        System.out.println(Heaps.getKthLatrgest(numbers,7));
 
         //////Tries//////////
-        var trie = new TriesWithHashMaps();
-        trie.insert("car");
-
-       trie.insert("care");
-        trie.insert("can");
-       trie.removeWord("car");
-        trie.removeWord("care");
-        //trie.insert("ass");
-        //System.out.println("Debug");
-       System.out.println(trie.contains("car"));
-       System.out.println(trie.contains("care"));
-        System.out.println(trie.contains("can"));
+//        var trie = new TriesWithHashMaps();
+//        trie.insert("car");
+//
+//       trie.insert("care");
+//        trie.insert("can");
+//       trie.removeWord("car");
+//        trie.removeWord("care");
+//        //trie.insert("ass");
+//        //System.out.println("Debug");
+//       System.out.println(trie.contains("car"));
+//       System.out.println(trie.contains("care"));
+//        System.out.println(trie.contains("can"));
 //        System.out.println("pre");
 //        trie.preOrdertraverse();
 //        System.out.println("post");
 //        trie.postOrdertraverse();
+
+        var trie = new TriesWithHashMaps();
+       trie.insert("car");
+        trie.insert("card");
+        trie.insert("care");
+        trie.insert("careful");
+        var words = trie.findWords("care");
+        System.out.println(words);
 
     }
 }

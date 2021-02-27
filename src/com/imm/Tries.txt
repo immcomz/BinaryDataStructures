@@ -8,3 +8,18 @@ Trie(Class)
     index = insser Ch - 'a' // integer value of a=100
     ex: calculate the index of 'D' in children Node Array
     100-97 =3 (d)
+
+
+          Auto Completion
+
+          c       e
+          a       g
+          r       g
+        d   e
+            f
+            u
+            l
+
+        Node root
+        String word
+        List<String> words to collects the words from Trie
