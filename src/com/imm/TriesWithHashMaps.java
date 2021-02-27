@@ -48,5 +48,19 @@ public class TriesWithHashMaps {
         }
         current.isEndOfWord = true;
     }
+    public boolean contains(String word){
+        if(word ==null) return false;
+
+        var current = root;
+        for(var ch: word.toCharArray()){ //iterate over ever ch in word
+            //if current node doesn't have a 'ch'
+            if(!current.hasAChild(ch))
+                return false;
+            //traversal
+            current = current.getChild(ch);
+        }
+        //otherwise found the word / return true
+        return current.isEndOfWord;
+    }
 }
 

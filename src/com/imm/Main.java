@@ -87,6 +87,10 @@ public class Main {
         var trie = new TriesWithHashMaps();
         trie.insert("cat");
         trie.insert("can");
+        trie.insert("asdasddasdas");
         System.out.println("Debug");
+        System.out.println(trie.contains("cay"));
+        System.out.println(trie.contains("can"));
+        System.out.println(trie.contains("asdasddasdas"));
     }
 }
