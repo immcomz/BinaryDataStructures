@@ -106,7 +106,7 @@ public class Main {
         trie.insert("card");
         trie.insert("care");
         trie.insert("careful");
-        var words = trie.findWords("care");
+        var words = trie.findWords("sad");
         System.out.println(words);
 
     }

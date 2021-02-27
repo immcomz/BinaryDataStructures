@@ -171,6 +171,7 @@ public class TriesWithHashMaps {
     private void findWords(Node root, String prefix,List<String> words ){
         //recursion method //pre-order Traversals
 
+        if(root == null) return;
         //if this current node represent an endOfWord (or word)
         if(root.isEndOfWord)
             words.add(prefix); // ex 'car' as prefix
@@ -180,7 +181,9 @@ public class TriesWithHashMaps {
             findWords(child,prefix + child.value,words); // 'card' and 'careful'
 
     }
-    private Node findLastNodeOf(String prefix){
+    private Node findLastNodeOf(String prefix){ //find the last node of prefix
+        if(prefix == null) return null;
+
         var current = root;
         // loop over all the ch in this preix String
         for(var ch: prefix.toCharArray()){
