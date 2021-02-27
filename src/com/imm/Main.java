@@ -85,15 +85,21 @@ public class Main {
 
         //////Tries//////////
         var trie = new TriesWithHashMaps();
-        trie.insert("cat");
-       trie.insert("can");
+        trie.insert("car");
+
+       trie.insert("care");
+        trie.insert("can");
+       trie.removeWord("car");
+        trie.removeWord("care");
         //trie.insert("ass");
-        System.out.println("Debug");
-//        System.out.println(trie.contains("cay"));
-//        System.out.println(trie.contains("can"));
-        System.out.println("pre");
-        trie.preOrdertraverse();
-        System.out.println("post");
-        trie.postOrdertraverse();
+        //System.out.println("Debug");
+       System.out.println(trie.contains("car"));
+       System.out.println(trie.contains("care"));
+        System.out.println(trie.contains("can"));
+//        System.out.println("pre");
+//        trie.preOrdertraverse();
+//        System.out.println("post");
+//        trie.postOrdertraverse();
+
     }
 }

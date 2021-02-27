@@ -7,6 +7,7 @@ public class TriesWithHashMaps {
     private class Node{
 
         private char value;
+        //children holds a character(K) and NODE(V)
         private HashMap<Character,Node> children = new HashMap<>();
         private boolean isEndOfWord;
 
@@ -37,6 +38,20 @@ public class TriesWithHashMaps {
             //return values with Node Array
             return children.values().toArray(new Node[0]);
         }
+        public boolean hasChildren(){
+            return !children.isEmpty();// return opposit (!return size == 0) inorder to code make more readable
+        }
+        public void removeChild(Character ch){
+            children.remove(ch);
+        }
+
+        //        root - children<'b', Node> - children<'a',Node('a')> - children<g,Node('g')>
+        //         |
+        //       children<'a',Node('a')>
+        //         |
+        //      children<'n',Node('n')>
+        //         |
+        //      children<'t',Node('t')>
     }
 
     //Every Trie has Empty Root/Empty Character
@@ -55,7 +70,7 @@ public class TriesWithHashMaps {
         current.isEndOfWord = true;
     }
     public boolean contains(String word){
-        if(word ==null) return false;
+        if(word == null) return false;
 
         var current = root;
         for(var ch: word.toCharArray()){ //iterate over ever ch in word
@@ -65,7 +80,8 @@ public class TriesWithHashMaps {
             //traversal
             current = current.getChild(ch);
         }
-        //otherwise found the word / return true
+        //otherwise found the word / not return true
+        // cause when remove some word its isEndOfWord=false not physically remove it
         return current.isEndOfWord;
     }
     public void preOrdertraverse(){
@@ -88,6 +104,45 @@ public class TriesWithHashMaps {
 
         //finally visit root
         System.out.println(root.value);
+
+    }
+    public void removeWord(String word){
+        if(word == null) return;
+
+        removeWord(root,word,0);
+    }
+    private void removeWord(Node root,String word,int index){
+        //base condition that terminate the recursion
+        if(index == word.length()){ //not word.length()-1 because starts from empty root
+            //visiting the last Node to Remove
+            //but need to remove later when com back to its paren  root.removeChild(ch);
+            System.out.println(root.value);
+            root.isEndOfWord = false;
+            return;
+        }
+
+        //1st get the 'ch' at the index of th word
+        var ch = word.charAt(index);
+
+        //get the child Node of  ch in root/children
+        var child = root.getChild(ch);
+
+        //if word doesn't exist/ no any Characters
+        if(child == null) return;
+
+        //post order traversal visiting child 1st
+        removeWord(child,word,index+1); //recursively remove/ go to the next indexes of the word
+
+        //then visit root to remove last index
+        //System.out.println(root.value);
+
+        // if the child doesn't have any children
+        // or no any characters related to end of the removing word
+        //ex: cant remove word 'CAT' cause 'CATEGORY' exist.
+        System.out.println(root.value);
+        //if doesnt have any children and it's not the end of another word, physically remove it
+        if(!child.hasChildren() && !child.isEndOfWord)
+           root.removeChild(ch);
 
     }
 }
