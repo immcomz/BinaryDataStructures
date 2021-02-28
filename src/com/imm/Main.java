@@ -101,13 +101,30 @@ public class Main {
 //        System.out.println("post");
 //        trie.postOrdertraverse();
 
-        var trie = new TriesWithHashMaps();
-       trie.insert("car");
-        trie.insert("card");
-        trie.insert("care");
-        trie.insert("careful");
-        var words = trie.findWords("sad");
-        System.out.println(words);
+//        var trie = new TriesWithHashMaps();
+//       trie.insert("car");
+//        trie.insert("card");
+//        trie.insert("care");
+//        trie.insert("careful");
+//        var words = trie.findWords("sad");
+//        System.out.println(words);
+
+        Graph graph = new Graph();
+        graph.addNode("a");
+        graph.addNode("a");
+        graph.addNode("b");
+        graph.addNode("c");
+        graph.addNode("d");
+        graph.addNode("e");
+
+        graph.addEdges("a","b");
+        graph.addEdges("a","c");
+        graph.addEdges("a","d");
+
+        graph.addEdges("b","d");
+        graph.addEdges("b","e");
+
+        graph.print();
 
     }
 }
