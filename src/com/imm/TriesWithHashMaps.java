@@ -115,12 +115,20 @@ public class TriesWithHashMaps {
         removeWord(root,word,0);
     }
     private void removeWord(Node root,String word,int index){
+        // Remove a Word from Trie
+
+        //C
+       // A
+       // R remove("car") R Node has children Node E so can't remove physically R just make isEndOfWord=False
+        //E remove("care") isEndOfWord=false and remove('E')
+
         //base condition that terminate the recursion
         if(index == word.length()){ //not word.length()-1 because starts from empty root
             //visiting the last Node to Remove
             //but need to remove later when com back to its paren  root.removeChild(ch);
+            //cause need to check weather node has children or not
             System.out.println(root.value);
-            root.isEndOfWord = false;
+            root.isEndOfWord = false; //CARE can only physically 'E' but CAR Node R has E children so R.isEndOfWord =false
             return;
         }
 
@@ -137,15 +145,13 @@ public class TriesWithHashMaps {
         removeWord(child,word,index+1); //recursively remove/ go to the next indexes of the word
 
         //then visit root to remove last index
-        //System.out.println(root.value);
-
+        System.out.println(root.value);
         // if the child doesn't have any children
         // or no any characters related to end of the removing word
         //ex: cant remove word 'CAT' cause 'CATEGORY' exist.
-        System.out.println(root.value);
         //if doesnt have any children and it's not the end of another word, physically remove it
         if(!child.hasChildren() && !child.isEndOfWord)
-           root.removeChild(ch);
+           root.removeChild(ch); //CARE can only physically 'E' but CAR Node R has E children
 
     }
 
@@ -157,11 +163,20 @@ public class TriesWithHashMaps {
    //                              start recursion
    //                                      / \
   //  (prefix+node(d).value) isEndOfWord  d   e (prefix+node(e).value)
-  //                      f(prefix+node(e).value+node(f).value)
-  //                             u
-   //                             l - isEndOfWord
+  //                                           f(prefix+node(e).value+node(f).value)
+  //                                            u
+   //                                             l - isEndOfWord =true
 
     public List<String> findWords(String prefix){
+        //  Auto Completion
+
+     //                     c
+     //                     a
+     //                     r - findLastNodeOf('car') , word.add('car') cause root.isEndOfWord=true
+     //  word.add('card') d   e
+     //  isEndOfWord=true      f
+     //                         u
+     //                          l word.add('careful'), isEndOfWord=true
         List<String> words = new ArrayList<>();
         var lastNode = findLastNodeOf(prefix);
         //start recursion

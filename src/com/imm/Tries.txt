@@ -10,7 +10,7 @@ Trie(Class)
     100-97 =3 (d)
 
 
-          Auto Completion
+        //  Auto Completion
 
           c       e
           a       g
@@ -23,3 +23,10 @@ Trie(Class)
         Node root
         String word
         List<String> words to collects the words from Trie
+
+        // Remove a Word from Trie
+
+          C
+          A
+          R remove("car") R Node has children Node E so can't remove physically R just make isEndOfWord=False
+          E remove("care") isEndOfWord=false and remove('E')
