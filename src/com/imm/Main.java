@@ -136,7 +136,10 @@ public class Main {
 //        System.out.println("After Removing Connection from A to B");
 //        graph.print();
 
-        graph.traverseDepthFirstRecursive("a");
+        System.out.println("traverseDepthFirstIterate(\"a\")");
+        graph.traverseDepthFirstIterate("a");
+        System.out.println("traverseDepthFirstIterate(\"a\")");
+        graph.traverseDepthFirstIterate("a");
 
     }
 }

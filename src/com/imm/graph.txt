@@ -1,0 +1,40 @@
+
+Depth-First Traversal using iterations
+
+Java Runtime Stack(call stack) [x,y]  (remember values and arguments in between method calls)
+[x] -> execute y
+[] -> execute x
+method(x)
+    method(y)
+
+push(root)
+while(stack is not empty)
+current = pop()
+visit(current)
+push each unvisited neighbours on to the stack
+
+
+C <--- A ---> B -->D         traverse('A')
+|--------------|
+|______________|
+|______________|        while(stack is not empty){
+|______________|
+|    Root(A)   |         set.add(stack.pop())
+-----------------       lopp over adjencyList.get(A)
+                        set.add(B,C  stack.push(B,C))
+
+|--------------|
+|______________|
+|______________|
+|_____C________|
+|     B        |         set.add(stack.pop())
+-----------------       lopp over adjencyList.get(C)
+                        set.add(nothing/no connection)  stack.push(nothing))
+
+ |--------------|
+ |______________|
+ |______________|
+ |______________|
+ |     B        |         set.add(stack.pop())
+ -----------------         lopp over adjencyList.get(B)
+                           set.add(D)  stack.push(D))

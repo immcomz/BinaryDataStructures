@@ -110,8 +110,36 @@ public class Graph {
         //
         for(var node: adjacencyList.get(root)) { //return ArrayList Nodes
             if (!visited.contains(node)) // if haven't visited this node/
-                traverseDepthFirstRecursive(node, visited); // visit recursively this node and its edges
+                traverseDepthFirstRecursive(node, visited); // visit recursively this node and its unvisited neighbours/connections
 
+        }
+    }
+
+    public void traverseDepthFirstIterate(String root){
+        var node = nodes.get(root);
+        if(node == null) return;
+
+        Set<Node> visited = new HashSet<>();
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(node);
+
+        while(!stack.isEmpty()){
+            var current = stack.pop();
+
+            if(visited.contains(current)) continue; // have visited this before get another node from stack
+            //or jump to next node // avoid duplications to the set
+
+            //otherwise
+            System.out.println(current); //print current node
+            visited.add(current);//add it to visited haven't visited
+
+            //now visit unvisited neighbours of current
+            for(var neighbour: adjacencyList.get(current)) {
+                //System.out.println("adjacencyList.get(current)"+neighbour);
+                if(!visited.contains(neighbour)) //haven't visited this node/neighbour before
+                    stack.push(neighbour);
+            }
         }
     }
 
