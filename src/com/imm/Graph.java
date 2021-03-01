@@ -53,5 +53,39 @@ public class Graph {
                 System.out.println(node + " is connected to " + edges);
         }
     }
+    public void removeNode(String lable){
+        //remove everything Nodes and Connections/edges
+        //get the node if its available
+        var node = nodes.get(lable);
+        if(node == null) return;
+
+        //node'A' ---------------------
+        //node'B'| [B,A,Y}           |
+        //       ---------------------
+        //node'C'| [t,A]             |
+        //       ---------------------
+        //ex : remove('A')
+        for(var n: adjacencyList.keySet())
+            adjacencyList.get(n).remove(node);// remove all the connections/edges to all nodes/lables in Arraylist value in Map
+        //node'A' ---------------------
+        //node'B'| [B,Y}           |
+        //       ---------------------
+        //node'C'| [t]             |
+        //       ---------------------
+        adjacencyList.remove(node);
+        //node'B'| [B,Y}           |
+        //       ---------------------
+        //node'C'| [t]             |
+        //       ---------------------
+        nodes.remove(lable);
+    }
+    public void removeEdges(String from, String to){
+        var fromNode = nodes.get(from);
+        if(fromNode == null) throw new IllegalStateException();
+        var toNode = nodes.get(to);
+        if(toNode == null) throw new IllegalStateException();
+
+        adjacencyList.get(fromNode).remove(toNode);
+    }
 
 }
