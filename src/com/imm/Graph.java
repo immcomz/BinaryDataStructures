@@ -1,8 +1,6 @@
 package com.imm;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Graph {
     private class Node{
@@ -48,7 +46,7 @@ public class Graph {
     public void print(){
 
         for(var node: adjacencyList.keySet()) {
-            var edges= adjacencyList.get(node); //get accoding to key
+            var edges= adjacencyList.get(node); //get according to key
             if(!edges.isEmpty())
                 System.out.println(node + " is connected to " + edges);
         }
@@ -87,5 +85,35 @@ public class Graph {
 
         adjacencyList.get(fromNode).remove(toNode);
     }
+    //Depth-First Traversal Using Recursive
+    public void traverseDepthFirstRecursive(String root){
+        var node = nodes.get(root);
+        if(node == null) return;
+        //otherwise start travel
+        traverseDepthFirstRecursive(node, new HashSet<>());
+    }
+    private void traverseDepthFirstRecursive(Node root, Set<Node> visited){
+        //Set keep the track of visited nodes/ edges
+
+        // visit root Node
+        System.out.println(root);
+
+        //now mark as Visited the root
+        visited.add(root);
+
+        //now recursively visit all the neighbours of this root Node
+
+        //  A->B ->C   start from A (!visited.contains(node)) visit B & E Edges in adjacencyList recursively
+        //  |      |   traverse C and its edges
+        //  v      v   Finally doesn't travel E cause its already travelled (visited.contains(node)=true)
+        //  E <----D
+        //
+        for(var node: adjacencyList.get(root)) { //return ArrayList Nodes
+            if (!visited.contains(node)) // if haven't visited this node/
+                traverseDepthFirstRecursive(node, visited); // visit recursively this node and its edges
+
+        }
+    }
+
 
 }

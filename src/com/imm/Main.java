@@ -110,7 +110,7 @@ public class Main {
 //        System.out.println(words);
 
         Graph graph = new Graph();
-        graph.addNode("a");
+
         graph.addNode("a");
         graph.addNode("b");
         graph.addNode("c");
@@ -121,19 +121,22 @@ public class Main {
         graph.addEdges("a","c");
         graph.addEdges("a","d");
 
+
         graph.addEdges("c","b");
         graph.addEdges("c","e");
 
         graph.addEdges("b","a");
         graph.addEdges("b","c");
 
-        graph.print();
-        graph.removeNode("b");
-        System.out.println("Removing B");
-        graph.print();
-        graph.removeEdges("a","d");
-        System.out.println("After Removing Connection from A to B");
-        graph.print();
+//        graph.print();
+//        graph.removeNode("b");
+//        System.out.println("Removing B");
+//        graph.print();
+//        graph.removeEdges("a","d");
+//        System.out.println("After Removing Connection from A to B");
+//        graph.print();
+
+        graph.traverseDepthFirstRecursive("a");
 
     }
 }
