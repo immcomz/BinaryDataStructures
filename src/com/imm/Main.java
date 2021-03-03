@@ -109,7 +109,8 @@ public class Main {
 //        var words = trie.findWords("sad");
 //        System.out.println(words);
 
-        Graph graph = new Graph();
+ /////////////Working with Graph////////////////
+       // Graph graph = new Graph();
 
 //        graph.addNode("a");
 //        graph.addNode("b");
@@ -141,17 +142,27 @@ public class Main {
 //        System.out.println("traverseDepthFirstIterate(\"a\")");
 //        graph.traverseDepthFirstIterate("a");
 //     Topological Example IN Acyclic GRAPH
-        graph.addNode("x");
-        graph.addNode("a");
-        graph.addNode("b");
-        graph.addNode("p");
+//        graph.addNode("x");
+//        graph.addNode("a");
+//        graph.addNode("b");
+//        graph.addNode("p");
+//
+//        graph.addEdges("x","a");
+//        graph.addEdges("x","b");
+//        graph.addEdges("a","p");
+//        graph.addEdges("b","p");
+//        graph.addEdges("p","x");
+//        System.out.println(graph.topologicalSort());
+//        System.out.println(graph.hasCycle());
 
-        graph.addEdges("x","a");
-        graph.addEdges("x","b");
-        graph.addEdges("a","p");
-        graph.addEdges("b","p");
-        graph.addEdges("p","x");
-        System.out.println(graph.topologicalSort());
-        System.out.println(graph.hasCycle());
+        // Working With Undirected Weighted Graph
+        var graph = new WeightedGraph();
+        graph.addNode("A");
+        graph.addNode("B");
+        graph.addNode("C");
+        graph.addEdges("A","B",2);
+        graph.addEdges("A","C",5);
+
+        graph.print();
     }
 }
