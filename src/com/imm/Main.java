@@ -150,6 +150,8 @@ public class Main {
         graph.addEdges("x","b");
         graph.addEdges("a","p");
         graph.addEdges("b","p");
+        graph.addEdges("p","x");
         System.out.println(graph.topologicalSort());
+        System.out.println(graph.hasCycle());
     }
 }

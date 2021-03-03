@@ -205,7 +205,51 @@ public class Graph {
         for (var neighbour : adjacencyList.get(node))
             topologicalSort(neighbour, visited, stack);
         // once finish traverse to all child/neighbours push them in to stack
-        //last children in the current
-        stack.push(node);
+        //last children in the current node
+        stack.push(node); //P,A,B,X p-deepest node while X is start
+    }
+    public boolean hasCycle() {
+        //  >B
+        // /  \
+        //A <- > C
+        // \  /
+        //  D
+        Set<Node> all = new HashSet<>();
+        all.addAll(nodes.values());//copy all the nodes to all set
+
+        Set<Node> visiting = new HashSet<>(); // currently trying to visiting
+        Set<Node> visited = new HashSet<>();
+
+        while (!all.isEmpty()) {//check each and every nodes in set weather has a cycle or not
+            var current = all.iterator().next();
+            if (hasCycle(current, all, visiting, visited))
+                return true;//if its a cycle
+        }
+
+        return false;//other wise no cycle
+    }
+
+    private boolean hasCycle(Node node, Set<Node> all,
+                             Set<Node> visiting, Set<Node> visited) {
+        all.remove(node);
+        visiting.add(node); //move all.remove(node) to currently visiting set
+
+        //visit all of the neighbours of this node
+        for (var neighbour : adjacencyList.get(node)) {
+            //if already visited a node
+            if (visited.contains(neighbour))
+                continue;
+            //trying to visiting twice which already trying to visiting  //ex c->A
+            if (visiting.contains(neighbour))
+                return true;
+            //recursively visit neighbours of this neighbour
+            if (hasCycle(neighbour, all, visiting, visited))
+                return true;
+        }
+        //move node from visiting to visited
+        visiting.remove(node);
+        visited.add(node);
+
+        return false;//no cycle found
     }
 }
