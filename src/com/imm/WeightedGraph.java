@@ -8,6 +8,8 @@ import java.util.Map;
 public class WeightedGraph {
     private class Node {
         private String label;
+        //add edge list in Node class instead of adjencyList
+        //now edges automatially get initialised
         private List<Edge> edges = new ArrayList<>();
 
         public Node(String label) {
@@ -18,7 +20,7 @@ public class WeightedGraph {
         public String toString() {
             return label;
         }
-
+        //add edge to this/current object
         public void addEdge(Node to, int weight) {
             edges.add(new Edge(this, to, weight));
         }
@@ -45,14 +47,17 @@ public class WeightedGraph {
         }
     }
     private Map<String,Node> nodes = new HashMap<>();
-    private Map<Node,List<Edge>> adjacencyList = new HashMap<>(); // Now EAch Node has multiple Edges is Weighted Graph
+    //Remove adjacencyList to make the implementation in more OO
+   // private Map<Node,List<Edge>> adjacencyList = new HashMap<>(); // Now EAch Node has multiple Edges is Weighted Graph
 
     public void addNode(String lable){
-        var node = new Node(lable);
+        //var node = new Node(lable);
         //avoid Duplication simpler using HashMap than iterate over an ArrayList find duplicates
         //put if any lable/node exist
-        nodes.putIfAbsent(lable,node);
-        adjacencyList.putIfAbsent(node,new ArrayList<>());
+        nodes.putIfAbsent(lable,new Node(lable));
+
+        //remove adjacencyList
+        //adjacencyList.putIfAbsent(node,new ArrayList<>());
 
     }
     public void addEdges(String from, String to,int weight){
@@ -63,16 +68,30 @@ public class WeightedGraph {
         if(toNode == null) throw new IllegalStateException();
 
         //otherwise add the connection/edge
-        adjacencyList.get(fromNode).add(new Edge(fromNode,toNode,weight));
+        fromNode.addEdge(toNode,weight);
+
+        //remove adjacencyList
+        //adjacencyList.get(fromNode).add(new Edge(fromNode,toNode,weight));
+
         //Weighted undirected Graph has edge to To to From as well
-        adjacencyList.get(toNode).add(new Edge(toNode,fromNode,weight));
+        toNode.addEdge(fromNode,weight);
+
+        //remove adjacencyList
+        //adjacencyList.get(toNode).add(new Edge(toNode,fromNode,weight));
     }
     public void print(){
 
-        for(var node: adjacencyList.keySet()) {
-            var edges= adjacencyList.get(node); //get according to key
+        //remove adjacencyList
+//        for(var node: adjacencyList.keySet()) {
+//            var edges= adjacencyList.get(node); //get according to key
+//            if(!edges.isEmpty())
+//                System.out.println(node + " is connected to " + edges);
+//        }
+        for(var node: nodes.values()) {
+            var edges= node.getEdges(); //get according to key
             if(!edges.isEmpty())
                 System.out.println(node + " is connected to " + edges);
         }
+
     }
 }
