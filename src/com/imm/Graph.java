@@ -142,27 +142,35 @@ public class Graph {
         }
     }
     public void traverseBreadthFirst(String root) {
+       // Breadth-first Traversal (Iterative) Using Queue (F[]R)
+       // C<-A->B->D-       Start From A
+       // ^         |       print A and visit its unvisited neighbours B and C F[B,C]R
+       // |_________|       print B and visit its unvisited neighbours D   F[C,D]R
+       //                   print C and visit its unvisited neighbours Null F[D]R
+       //                   print D and visit its unvisited neighbours C, but already visited C finally stop.
         var node = nodes.get(root);
         if (node == null)
             return;
 
-        Set<Node> visited = new HashSet<>();
+        Set<Node> visited = new HashSet<>(); //holds visited nodes
 
-        Queue<Node> queue = new ArrayDeque<>();
+        Queue<Node> queue = new ArrayDeque<>(); //
         queue.add(node);
 
         while (!queue.isEmpty()) {
             var current = queue.remove();
 
-            if (visited.contains(current))
-                continue;
+            if (visited.contains(current)) //already have visited to this parent/root
+                continue; ///go/skip to the next root/parent
 
+            //otherwise
             System.out.println(current);
             visited.add(current);
 
+            //now visit current's unvisited neighbours
             for (var neighbour : adjacencyList.get(current))
-                if (!visited.contains(neighbour))
-                    queue.add(neighbour);
+                if (!visited.contains(neighbour)) //haven't visited to this neighbour before
+                    queue.add(neighbour); //add to queue
         }
     }
     public List<String> topologicalSort() {

@@ -1,5 +1,5 @@
 
-Depth-First Traversal using iterations
+Depth-First Traversal using iterations Using a Stack
 
 Java Runtime Stack(call stack) [x,y]  (remember values and arguments in between method calls)
 [x] -> execute y
@@ -21,7 +21,7 @@ C <--- A ---> B -->D         traverse('A')
 |______________|
 |    Root(A)   |         set.add(stack.pop())
 -----------------       lopp over adjencyList.get(A)
-                        set.add(B,C  stack.push(B,C))
+                         stack.push(B,C))
 
 |--------------|
 |______________|
@@ -29,7 +29,7 @@ C <--- A ---> B -->D         traverse('A')
 |_____C________|
 |     B        |         set.add(stack.pop())
 -----------------       lopp over adjencyList.get(C)
-                        set.add(nothing/no connection)  stack.push(nothing))
+                          stack.push(nothing))
 
  |--------------|
  |______________|
@@ -37,4 +37,11 @@ C <--- A ---> B -->D         traverse('A')
  |______________|
  |     B        |         set.add(stack.pop())
  -----------------         lopp over adjencyList.get(B)
-                           set.add(D)  stack.push(D))
+                            stack.push(D))
+
+  Breadth-first Traversal (Iterative) Using Queue
+  C<-A->B->D-       Start From A
+  ^         |       print A and visit its unvisited neighbours B and C F[B,C]R
+  |_________|       print B and visit its unvisited neighbours D   F[C,D]R
+                    print C and visit its unvisited neighbours Null F[D]R
+                    print D and visit its unvisited neighbours C, but already visited C finally stop.
