@@ -174,29 +174,38 @@ public class Graph {
         }
     }
     public List<String> topologicalSort() {
+    //  >A
+    // /  \
+    //X    > P
+    // \  /
+    //  >B
+
         Stack<Node> stack = new Stack<>();
         Set<Node> visited = new HashSet<>();
 
+        // depth first travels every node in graph
         for (var node : nodes.values())
             topologicalSort(node, visited, stack);
-
+        //now stack contains the all the topological Nodes in a Reverse Order
         List<String> sorted = new ArrayList<>();
         while (!stack.empty())
-            sorted.add(stack.pop().lable);
+            sorted.add(stack.pop().lable); // pop them into srted and make them in correct order
 
-        return sorted;
+        return sorted;//return sorted
     }
 
     private void topologicalSort(
             Node node, Set<Node> visited, Stack<Node> stack) {
+        //return from recursive method if already visited
         if (visited.contains(node))
             return;
-
+        //otherwise add node to visited
         visited.add(node);
-
+        //visit all neighbours recursively
         for (var neighbour : adjacencyList.get(node))
             topologicalSort(neighbour, visited, stack);
-
+        // once finish traverse to all child/neighbours push them in to stack
+        //last children in the current
         stack.push(node);
     }
 }

@@ -1,5 +1,5 @@
 
-Depth-First Traversal using iterations Using a Stack
+Depth-First(travel neighbours/children first and then root) Traversal using iterations Using a Stack
 
 Java Runtime Stack(call stack) [x,y]  (remember values and arguments in between method calls)
 [x] -> execute y
@@ -45,3 +45,15 @@ C <--- A ---> B -->D         traverse('A')
   |_________|       print B and visit its unvisited neighbours D   F[C,D]R
                     print C and visit its unvisited neighbours Null F[D]R
                     print D and visit its unvisited neighbours C, but already visited C finally stop.
+
+  Topological Sort (Depth- First) works only for Acyclic graph (without Circle) as below
+     >A
+    /   \
+  X      > P
+    \>B /
+                         |--------------| sortedList = stak.pop()
+                         |_____X________|
+                         |_____B________|
+                         |_____A________|
+                         |     P        |
+                         -----------------

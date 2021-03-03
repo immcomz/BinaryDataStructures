@@ -111,35 +111,45 @@ public class Main {
 
         Graph graph = new Graph();
 
+//        graph.addNode("a");
+//        graph.addNode("b");
+//        graph.addNode("c");
+//        graph.addNode("d");
+//        graph.addNode("e");
+//
+//        graph.addEdges("a","b");
+//        graph.addEdges("a","c");
+//        graph.addEdges("a","d");
+//
+//
+//        graph.addEdges("c","b");
+//        graph.addEdges("c","e");
+//
+//        graph.addEdges("b","a");
+//        graph.addEdges("b","c");
+//
+////        graph.print();
+////        graph.removeNode("b");
+////        System.out.println("Removing B");
+////        graph.print();
+////        graph.removeEdges("a","d");
+////        System.out.println("After Removing Connection from A to B");
+////        graph.print();
+//
+//        System.out.println("traverseDepthFirstIterate(\"a\")");
+//        graph.traverseDepthFirstIterate("a");
+//        System.out.println("traverseDepthFirstIterate(\"a\")");
+//        graph.traverseDepthFirstIterate("a");
+//     Topological Example IN Acyclic GRAPH
+        graph.addNode("x");
         graph.addNode("a");
         graph.addNode("b");
-        graph.addNode("c");
-        graph.addNode("d");
-        graph.addNode("e");
+        graph.addNode("p");
 
-        graph.addEdges("a","b");
-        graph.addEdges("a","c");
-        graph.addEdges("a","d");
-
-
-        graph.addEdges("c","b");
-        graph.addEdges("c","e");
-
-        graph.addEdges("b","a");
-        graph.addEdges("b","c");
-
-//        graph.print();
-//        graph.removeNode("b");
-//        System.out.println("Removing B");
-//        graph.print();
-//        graph.removeEdges("a","d");
-//        System.out.println("After Removing Connection from A to B");
-//        graph.print();
-
-        System.out.println("traverseDepthFirstIterate(\"a\")");
-        graph.traverseDepthFirstIterate("a");
-        System.out.println("traverseDepthFirstIterate(\"a\")");
-        graph.traverseDepthFirstIterate("a");
-
+        graph.addEdges("x","a");
+        graph.addEdges("x","b");
+        graph.addEdges("a","p");
+        graph.addEdges("b","p");
+        System.out.println(graph.topologicalSort());
     }
 }
