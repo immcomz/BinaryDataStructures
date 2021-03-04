@@ -1,9 +1,6 @@
 package com.imm;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WeightedGraph {
     private class Node {
@@ -20,6 +17,7 @@ public class WeightedGraph {
         public String toString() {
             return label;
         }
+
         //add edge to this/current object
         public void addEdge(Node to, int weight) {
             edges.add(new Edge(this, to, weight));
@@ -105,6 +103,79 @@ public class WeightedGraph {
             this.node = node;
             this.priority = priority;
         }
+    }
+
+    public Path getShortestPath(String from, String to) {
+        var fromNode = nodes.get(from);//starting Node
+        if (fromNode == null)
+            throw new IllegalArgumentException();
+
+        var toNode = nodes.get(to); //end Node
+        if (toNode == null)
+            throw new IllegalArgumentException();
+
+        Map<Node, Integer> distances = new HashMap<>();
+        for (var node : nodes.values()) //add weights of each nodes to distance map
+            distances.put(node, Integer.MAX_VALUE);
+        distances.replace(fromNode, 0);//make starting node weight as 0
+
+        Map<Node, Node> previousNodes = new HashMap<>();
+
+        Set<Node> visited = new HashSet<>(); //to keep track of visited nodes/ avoid Duplication
+
+        //priority queue to add node with priority(NodeEntries)
+        //Highest Priority node will move to front
+        PriorityQueue<NodeEntry> queue = new PriorityQueue<>(
+                Comparator.comparingInt(ne -> ne.priority)
+        );
+        queue.add(new NodeEntry(fromNode, 0));//fromNode is the staring node(make weight 0)
+
+        // A--3--B
+        // |\    | \1
+        // | \   |  \
+        // 4  2  6    D
+        // |   \ |  /
+        // |    \| /5
+        // C--1--D
+        //breadth first traversal or travel root/parent first (starting node first)
+        while (!queue.isEmpty()) {
+            var current = queue.remove().node;
+            visited.add(current); //add current to visited
+
+            //now vist all the unvisited neighbours
+            for (var edge : current.getEdges()) {
+                if (visited.contains(edge.to)) //if current neighbour/edge already visited
+                    continue; //skip to next neighbour
+                //              = A +B
+                var newDistance = distances.get(current) + edge.weight;// distance from starting node to current node + distance to its/current edge/neighbour
+                if (newDistance < distances.get(edge.to)) { //A+B(3) < A+D+B (2+6+8) or Visit B Via A < Visit B Via D followed by A
+                    //update the distance table with shortest path from to current node
+                    distances.replace(edge.to, newDistance);
+                    previousNodes.put(edge.to, current);
+                    queue.add(new NodeEntry(edge.to, newDistance));
+                }
+            }
+        }
+
+        return buildPath(previousNodes, toNode);
+    }
+
+    private Path buildPath(
+            Map<Node, Node> previousNodes, Node toNode) {
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(toNode);
+        var previous = previousNodes.get(toNode);
+        while (previous != null) {
+            stack.push(previous);
+            previous = previousNodes.get(previous);
+        }
+
+        var path = new Path();
+        while (!stack.isEmpty())
+            path.add(stack.pop().label);
+
+        return path;
     }
 
 
