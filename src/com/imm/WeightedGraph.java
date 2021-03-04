@@ -94,4 +94,18 @@ public class WeightedGraph {
         }
 
     }
+
+    //NodeEntry class to determine the priority level for a Node
+    //Now Node class hasn't polluted by priority field
+    private class NodeEntry {
+        private Node node;
+        private int priority;
+
+        public NodeEntry(Node node, int priority) {
+            this.node = node;
+            this.priority = priority;
+        }
+    }
+
+
 }
