@@ -115,6 +115,7 @@ public class WeightedGraph {
             throw new IllegalArgumentException();
 
         Map<Node, Integer> distances = new HashMap<>();
+        var sds = nodes.values();
         for (var node : nodes.values()) //add weights of each nodes to distance map
             distances.put(node, Integer.MAX_VALUE);
         distances.replace(fromNode, 0);//make starting node weight as 0
@@ -133,22 +134,23 @@ public class WeightedGraph {
         // A--3--B
         // |\    | \1
         // | \   |  \
-        // 4  2  6    D
+        // 4  2  6    E
         // |   \ |  /
         // |    \| /5
         // C--1--D
         //breadth first traversal or travel root/parent first (starting node first)
         while (!queue.isEmpty()) {
-            var current = queue.remove().node;
+            var current = queue.remove().node; //ex A
             visited.add(current); //add current to visited
 
             //now vist all the unvisited neighbours
-            for (var edge : current.getEdges()) {
+            for (var edge : current.getEdges()) { // ex B
                 if (visited.contains(edge.to)) //if current neighbour/edge already visited
                     continue; //skip to next neighbour
-                //              = A +B
+                //   current distance = A +B
                 var newDistance = distances.get(current) + edge.weight;// distance from starting node to current node + distance to its/current edge/neighbour
-                if (newDistance < distances.get(edge.to)) { //A+B(3) < A+D+B (2+6+8) or Visit B Via A < Visit B Via D followed by A
+                //compare with new distance with currently recorded of distance of it neighbour(edge.to is considered as a neighbour)
+                if (newDistance < distances.get(edge.to)) { //ex: A+B(3) < A+D+B (2+6+8) or Visit B Via A < Visit B Via D followed by A =false
                     //update the distance table with shortest path from to current node
                     distances.replace(edge.to, newDistance);
                     previousNodes.put(edge.to, current);
