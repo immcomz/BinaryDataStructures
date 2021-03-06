@@ -160,9 +160,21 @@ public class Main {
         graph.addNode("A");
         graph.addNode("B");
         graph.addNode("C");
-        graph.addEdges("A","B",2);
-        graph.addEdges("A","C",5);
+        graph.addNode("D");
+//        graph.addEdges("A","B",4);
+//        graph.addEdges("A","C",2);
+//        graph.addEdges("B","D",3);
+//        graph.addEdges("C","D",1);
 
-        graph.print();
+        graph.addNode("E");
+        graph.addEdges("A","C",4);
+        graph.addEdges("A","D",2);
+        graph.addEdges("A","B",3);
+        graph.addEdges("C","D",1);
+        graph.addEdges("B","D",6);
+        graph.addEdges("B","E",1);
+        graph.addEdges("D","E",5);
+
+        System.out.println(graph.getShortestPath("A","D"));
     }
 }

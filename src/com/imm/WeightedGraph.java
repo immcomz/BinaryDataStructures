@@ -105,7 +105,7 @@ public class WeightedGraph {
         }
     }
 
-    public Path getShortestPath(String from, String to) {
+    public int getShortestPath(String from, String to) {
         var fromNode = nodes.get(from);//starting Node
         if (fromNode == null)
             throw new IllegalArgumentException();
@@ -114,13 +114,13 @@ public class WeightedGraph {
         if (toNode == null)
             throw new IllegalArgumentException();
 
+        //distance HashTable to al Nodes except the starting node
         Map<Node, Integer> distances = new HashMap<>();
-        var sds = nodes.values();
         for (var node : nodes.values()) //add weights of each nodes to distance map
             distances.put(node, Integer.MAX_VALUE);
         distances.replace(fromNode, 0);//make starting node weight as 0
 
-        Map<Node, Node> previousNodes = new HashMap<>();
+        Map<Node, Node> previousNodes = new HashMap<>();// shortest distance from previous node
 
         Set<Node> visited = new HashSet<>(); //to keep track of visited nodes/ avoid Duplication
 
@@ -140,42 +140,53 @@ public class WeightedGraph {
         // C--1--D
         //breadth first traversal or travel root/parent first (starting node first)
         while (!queue.isEmpty()) {
-            var current = queue.remove().node; //ex A
+            var current = queue.remove().node;
             visited.add(current); //add current to visited
-
-            //now vist all the unvisited neighbours
-            for (var edge : current.getEdges()) { // ex B
+            System.out.println("current "+current);
+            //now visit all the unvisited neighbours
+            for (var edge : current.getEdges()) {
                 if (visited.contains(edge.to)) //if current neighbour/edge already visited
                     continue; //skip to next neighbour
                 //   current distance = A +B
                 var newDistance = distances.get(current) + edge.weight;// distance from starting node to current node + distance to its/current edge/neighbour
+                System.out.println("newDistance " + "from " +current + " to "+edge.to+ " is "+newDistance);
                 //compare with new distance with currently recorded of distance of it neighbour(edge.to is considered as a neighbour)
-                if (newDistance < distances.get(edge.to)) { //ex: A+B(3) < A+D+B (2+6+8) or Visit B Via A < Visit B Via D followed by A =false
+                //currently at D and try to visit B(D.B) via D followed by A (A->D->B) > A.B
+                if (newDistance < distances.get(edge.to)) { //ex: A+B(3)(previously recorded) < A+D+B (2+6+8) or Visit B Via A < Visit B Via D followed by A =false
                     //update the distance table with shortest path from to current node
-                    distances.replace(edge.to, newDistance);
-                    previousNodes.put(edge.to, current);
-                    queue.add(new NodeEntry(edge.to, newDistance));
+                    distances.replace(edge.to, newDistance);// update edge's neighbour distance to new Distance
+                    previousNodes.put(edge.to, current);// set previous node to current.edge
+                    queue.add(new NodeEntry(edge.to, newDistance));//lowest distance node will come to the Front
                 }
             }
         }
 
-        return buildPath(previousNodes, toNode);
+       // return buildPath(previousNodes, toNode);
+        return distances.get(nodes.get(to));
     }
 
     private Path buildPath(
+            //node  distance  previous
+            //A        0
+            //B        3        A
+            //C        3        D
+            //D        2        A
+            //E        4        B
+
             Map<Node, Node> previousNodes, Node toNode) {
 
         Stack<Node> stack = new Stack<>();
-        stack.push(toNode);
-        var previous = previousNodes.get(toNode);
+        stack.push(toNode);//push E(toNode)
+        //ex: path A-E
+        var previous = previousNodes.get(toNode); //(toNode)E->B(previous)
         while (previous != null) {
-            stack.push(previous);
-            previous = previousNodes.get(previous);
+            stack.push(previous);//push B then push A
+            previous = previousNodes.get(previous); //B->A (previous of previous)
         }
 
         var path = new Path();
         while (!stack.isEmpty())
-            path.add(stack.pop().label);
+            path.add(stack.pop().label);//get the paths in to correct order by poping stack
 
         return path;
     }
