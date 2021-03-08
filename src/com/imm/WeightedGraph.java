@@ -1,7 +1,7 @@
 package com.imm;
 
 import java.util.*;
-
+//Undirected Weighted Graphs
 public class WeightedGraph {
     private class Node {
         private String label;
@@ -105,7 +105,7 @@ public class WeightedGraph {
         }
     }
 
-    public int getShortestPath(String from, String to) {
+    public Path getShortestPath(String from, String to) {
         var fromNode = nodes.get(from);//starting Node
         if (fromNode == null)
             throw new IllegalArgumentException();
@@ -161,19 +161,18 @@ public class WeightedGraph {
             }
         }
 
-       // return buildPath(previousNodes, toNode);
-        return distances.get(nodes.get(to));
+       return buildPath(previousNodes, toNode);
+        //return distances.get(nodes.get(to));
     }
 
     private Path buildPath(
-            //node  distance  previous
-            //A        0
-            //B        3        A
-            //C        3        D
-            //D        2        A
-            //E        4        B
-
             Map<Node, Node> previousNodes, Node toNode) {
+        //node  distance  previous
+        //A        0
+        //B        3        A
+        //C        3        D
+        //D        2        A
+        //E        4        B
 
         Stack<Node> stack = new Stack<>();
         stack.push(toNode);//push E(toNode)
@@ -191,5 +190,34 @@ public class WeightedGraph {
         return path;
     }
 
+    public boolean hasCycle(){
+        Set<Node> visited = new HashSet<>();
+        for(var node:nodes.values()){
+            if(!visited.contains(node))// haven't visited this before
+                if(hasCycle(node,null,visited)) return true;
+        }
+        return false;// cant find a cycle
+    }
+
+    private boolean hasCycle(Node node,Node parent, Set<Node> visited){
+
+        //    A---B (Parent/previous A)   Visited - A A.B
+        //     \  |                                 B.C C.A(visited) return true/has a cycle
+        //      \ |
+        //        C (Parent/previous B)
+
+        //add to visited
+        visited.add(node);
+
+        for(var edge : node.getEdges()){
+            if(edge.to == parent)// if neighbour trying to visiting where it came from(ex: C Visiting B (C.B) but B is parent/previous of C)
+               continue; // ignore it
+
+            if(visited.contains(edge.to)) return true; //already visited
+            //recursively visit neighbours of edge(Depth First Traversal) , node beacome previous/parent now
+            if(hasCycle(edge.to,node,visited)) return true;
+        }
+        return false; //no cycles
+    }
 
 }

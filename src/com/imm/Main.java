@@ -175,6 +175,7 @@ public class Main {
         graph.addEdges("B","E",1);
         graph.addEdges("D","E",5);
 
-        System.out.println(graph.getShortestPath("A","D"));
+        System.out.println(graph.getShortestPath("A","E"));
+        System.out.println(graph.hasCycle());
     }
 }

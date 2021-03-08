@@ -197,19 +197,24 @@ public class Graph {
 
     private void topologicalSort(
             Node node, Set<Node> visited, Stack<Node> stack) {
+        //reffer to graph.txt
+
         //return from recursive method if already visited
         if (visited.contains(node))
             return;
+
         //otherwise add node to visited
         visited.add(node);
+
         //visit all neighbours recursively
         for (var neighbour : adjacencyList.get(node))
             topologicalSort(neighbour, visited, stack);
         // once finish traverse to all child/neighbours push them in to stack
         //last children in the current node
-        stack.push(node); //P,A,B,X p-deepest node while X is start
+        stack.push(node); //P,A,B,X where p-deepest node while X is start
     }
     public boolean hasCycle() {
+
         //  >B
         // /  \
         //A <- > C
@@ -244,7 +249,7 @@ public class Graph {
             if (visiting.contains(neighbour))
                 return true;
             //recursively visit neighbours of this neighbour
-            if (hasCycle(neighbour, all, visiting, visited))
+            if (hasCycle(neighbour, all, visiting, visited))// similar to hasCycle(neighbour, all, visiting, visited)==true
                 return true;
         }
         //move node from visiting to visited
