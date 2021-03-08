@@ -166,16 +166,25 @@ public class Main {
 //        graph.addEdges("B","D",3);
 //        graph.addEdges("C","D",1);
 
-        graph.addNode("E");
-        graph.addEdges("A","C",4);
-        graph.addEdges("A","D",2);
-        graph.addEdges("A","B",3);
-        graph.addEdges("C","D",1);
-        graph.addEdges("B","D",6);
-        graph.addEdges("B","E",1);
-        graph.addEdges("D","E",5);
+//        graph.addNode("E");
+//        graph.addEdges("A","C",4);
+//        graph.addEdges("A","D",2);
+//        graph.addEdges("A","B",3);
+//        graph.addEdges("C","D",1);
+//        graph.addEdges("B","D",6);
+//        graph.addEdges("B","E",1);
+//        graph.addEdges("D","E",5);
+//
+//        System.out.println(graph.getShortestPath("A","E"));
+//        System.out.println(graph.hasCycle());
 
-        System.out.println(graph.getShortestPath("A","E"));
-        System.out.println(graph.hasCycle());
+        graph.addEdges("A","B",3);
+        graph.addEdges("A","C",1);
+        graph.addEdges("B","C",2);
+        graph.addEdges("C","D",5);
+        graph.addEdges("B","D",4);
+        var tree = graph.getMinimumSpanningTree();
+        tree.print();
+
     }
 }

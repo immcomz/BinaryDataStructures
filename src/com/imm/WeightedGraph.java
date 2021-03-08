@@ -220,4 +220,58 @@ public class WeightedGraph {
         return false; //no cycles
     }
 
+    public WeightedGraph getMinimumSpanningTree() {
+        // Weighted graph    Minimum Spanning Tree   starting node A ->  Tree.add(A)  -> add all edges of A to PQ [A->C,A->B]
+        //    A--3--B           A     B              while(tree.nodes.size < graph.nodes.size) // or Tree.edges == n-1 n=total edges in graph //
+        //    |   / |           |   / |                minEdge(A->C) = PQ.remove
+        //    1  3  4           1  2  4                 nextNode-> minEdge.to.label
+        //    | /   |           | /   |                     foreach()
+        //    C--5--D           C     D                         if(!tree.contains(V))
+        //                                                          add all edges of nextNode(C)
+
+        var tree = new WeightedGraph();// new Minimum Spanning tree which will form from the graph
+
+        if (nodes.isEmpty())
+            return tree; //tree doesn't have any node
+
+        PriorityQueue<Edge> edges = new PriorityQueue<>( //PQ which holds the all edges with wight
+                Comparator.comparingInt(e -> e.weight) //lowest weight will come to front of Q
+        );
+
+        var startNode = nodes.values().iterator().next(); //ex: A
+        edges.addAll(startNode.getEdges()); // add all edges of starting Node //ex: PQ[C,B]
+        tree.addNode(startNode.label);// add starting node to tree T.add("A")
+
+        if (edges.isEmpty())
+            return tree; //tree doesn't have any edges
+//Completion of initial Setup
+
+
+        //Repeat, As long as tree doesn't have all the nodes in the graph
+        while (tree.nodes.size() < nodes.size()) { // or  Tree.edges == n-1 n=total edges in graph
+
+            var minEdge = edges.remove();//front has the lowest edge with node ex:A->C(weight=1)
+            var nextNode = minEdge.to; // edgeNode of node //EX: C (A->C where C is the edge of A)
+
+            if (tree.containsNode(nextNode.label))//already tree contains nextNode/ visited target node
+                continue;
+
+            //otherwise add this node to tree
+            tree.addNode(nextNode.label);
+            //add the edge ex: A->C from=A To=C weight=A->C
+            tree.addEdges(minEdge.from.label,
+                    nextNode.label, minEdge.weight);
+
+            //add all the edges connected to this next node to Priority Q
+            for (var edge : nextNode.getEdges())
+                if (!tree.containsNode(edge.to.label)) //unless tree doesn't exist this node(edge.to.label) or already visited this node
+                    edges.add(edge);
+        }
+
+        return tree;
+    }
+
+    public boolean containsNode(String label) {
+        return nodes.containsKey(label);
+    }
 }
